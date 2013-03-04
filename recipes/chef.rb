@@ -5,14 +5,14 @@
 # Copyright 2012, Panagiotis Papadomitsos <pj@ezgr.net>
 #
 
-include_recipe 'supervisor'
+#include_recipe 'supervisor'
 
-adminobj = data_bag_item(node['rundeck']['admin']['data_bag'], node['rundeck']['admin']['data_bag_id'])
+#adminobj = data_bag_item(node['rundeck']['admin']['data_bag'], node['rundeck']['admin']['data_bag_id'])
 
-if adminobj['client_key'].nil? || adminobj['client_key'].empty? || adminobj['client_name'].nil? || adminobj['client_name'].empty?
-	Chef::Log.info("Could not locate a valid client/PEM key pair for chef-rundeck. Please define one!")
-	return true
-end
+#if adminobj['client_key'].nil? || adminobj['client_key'].empty? || adminobj['client_name'].nil? || adminobj['client_name'].empty?
+	#Chef::Log.info("Could not locate a valid client/PEM key pair for chef-rundeck. Please define one!")
+	#return true
+#end
 
 # Install the chef-rundeck gem on the Chef omnibus package. Useful workaround instead of installing RVM, a system Ruby etc
 # and it offers minimal system pollution

@@ -24,7 +24,6 @@ action :create do
 			end
 		end
 	end
-
 end
 
 action :remove do
