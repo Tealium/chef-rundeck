@@ -17,6 +17,8 @@ default['rundeck']['mail'] = {
 	'tls'      		=> false
 }
 
+default['rundeck']['home'] = '/var/lib/rundeck'
+
 default['rundeck']['mail']['recipients_data_bag'] = 'users'
 default['rundeck']['mail']['recipients_query'] = 'notify:true'
 default['rundeck']['mail']['recipients_field'] = 'email'
@@ -24,7 +26,7 @@ default['rundeck']['mail']['recipients_field'] = 'email'
 default['rundeck']['admin']['data_bag'] = 'cookies'
 default['rundeck']['admin']['data_bag_id'] = 'rundeck'
 
-default['rundeck']['proxy']['hostname'] = 'servers.tealiumiq.com'
+default['rundeck']['proxy']['hostname'] = 'servers.ops.tlium.com'
 default['rundeck']['proxy']['default'] = false
 
 default['rundeck']['ssh']['user'] = 'rundeck-ssh'
@@ -33,5 +35,6 @@ default['rundeck']['ssh']['port'] = 22
 
 default['rundeck']['chef']['port'] = 9998
 
-default['username'] = 'root'
-default['password'] = 'root'
+default['rundeck']['username'] = 'rundeck'
+default['rundeck']['group'] = 'rundeck'
+default['rundeck']['password'] = 'rundeck'

@@ -1,4 +1,4 @@
-description: Admin, all access.
+escription: Admin, all access.
 context:
   project: '.*' # all projects
 for:
@@ -6,7 +6,7 @@ for:
     - allow: '*' # allow read/create all kinds
   adhoc:
     - allow: '*' # allow read/running/killing adhoc jobs
-  job: 
+  job:
     - allow: '*' # allow read/write/delete/run/kill of all jobs
   node:
     - allow: '*' # allow read/run for all nodes
@@ -25,3 +25,108 @@ for:
     - allow: '*' # allow view/admin of all projects
 by:
   group: admin
+
+---
+
+description: QA1
+context:
+  application: 'rundeck'
+for:
+  project:
+    - match:
+        name: 'QA1_Servers'
+      allow: [read]
+by:
+  group: qa1
+
+---
+
+description: QA1
+context:
+  project: 'QA1_Servers'
+for:
+  resource:
+    - equals:
+        kind: node
+      allow: [read,refresh] # allow refresh node sources
+    - equals:
+        kind: event
+      allow: [read] # allow read events
+  adhoc:
+    - deny: '*'
+  job:
+    - allow: [read,run]
+  node:
+    - allow: [read,run]
+by:
+  group: qa1
+
+---
+
+description: QA2
+context:
+  application: 'rundeck'
+for:
+  project:
+    - match:
+        name: 'QA2_Serers'
+      allow: [read]
+by:
+  group: qa2
+
+---
+
+description: QA2
+context:
+  project: 'QA2_Serers'
+for:
+  resource:
+    - equals:
+        kind: node
+      allow: [read,refresh] # allow refresh node sources
+    - equals:
+        kind: event
+      allow: [read] # allow read events
+  adhoc:
+    - deny: '*'
+  job:
+    - allow: [read,run]
+  node:
+    - allow: [read,run]
+by:
+  group: qa2
+
+---
+
+description: TMU
+context:
+  application: 'rundeck'
+for:
+  project:
+    - match:
+        name: 'TMU_Servers'
+      allow: [read]
+by:
+  group: tmu
+
+---
+
+description: TMU
+context:
+  project: 'TMU_Servers'
+for:
+  resource:
+    - equals:
+        kind: node
+      allow: [read,refresh] # allow refresh node sources
+    - equals:
+        kind: event
+      allow: [read] # allow read events
+  adhoc:
+    - deny: '*'
+  job:
+    - allow: [read,run]
+  node:
+    - allow: [read,run]
+by:
+  group: tmu

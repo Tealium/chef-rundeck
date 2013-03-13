@@ -10,7 +10,7 @@
 		source 'rundeck-ec2-nodes-plugin-1.3.jar'
 		owner 'rundeck'
 		group 'rundeck'
-		mode 00644
+		mode 0777
 		action :create
 		notifies :restart, "service[rundeckd]"		
 	end

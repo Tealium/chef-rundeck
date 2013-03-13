@@ -72,7 +72,7 @@
 		owner 'rundeck'
 		group 'rundeck'
 		mode 00644
-		action :create_if_missing
+		action :create
 	end
 	
 	#rundeck_user adminobj['username'] do
@@ -82,32 +82,61 @@
 	#	action :create
 	#end
 
-	cookbook_file '/etc/logrotate.d/rundeck' do
-		source 'rundeck.logrotate'
-		owner 'root'
-		group 'root'
-		mode 00644
-	end
+	#cookbook_file '/etc/logrotate.d/rundeck' do
+#		source 'rundeck.logrotate'
+#		owner 'root'
+#		group 'root'
+#		mode 00644
+	#end
 	
 	# SSH private key. Stored in the data bag item as an array
 	#unless adminobj['ssh_key'].nil? || adminobj['ssh_key'].empty?
 #
-	#	directory "/var/lib/rundeck/.ssh" do
-	#		owner 'rundeck'
-	#		group 'rundeck'
-	#		mode 00755
-	#		action :create
-	#	end
-#
-	#	file "/var/lib/rundeck/.ssh/id_rsa" do
-	#		action :create
-	#		owner 'rundeck'
-	#		group 'rundeck'
-	#		mode 00600
-	#		content adminobj['ssh_key'].join("\n")
-	#	end
+	 pkey = "#{node[:rundeck][:home]}/.ssh/id_rsa"
 
-	#end
+	 Chef::Log.info("Creating the Git Key on Rundeck")
+   rundeck_keys = search(:rundeck_keys, "id:production").first
+
+   
+   node[:rundeck][:public_key] = rundeck_keys["public_key"] 
+   node[:rundeck][:private_key] = rundeck_keys["private_key"]
+
+  directory "#{node[:rundeck][:home]}/.ssh" do
+    mode 0700
+    owner node[:rundeck][:username]
+    group node[:rundeck][:group]
+  end
+
+   file "#{node[:rundeck][:home]}/.ssh/id_rsa" do
+      Chef::Log.info("The pem_key is: #{node[:rundeck][:private_key]} and the owner should be #{node[:rundeck][:username]}")
+      content node[:rundeck][:private_key]
+      owner node[:rundeck][:username]
+      group node[:rundeck][:group]
+      mode 0600
+   end
+
+   file "#{node[:rundeck][:home]}/.ssh/id_rsa.pub" do
+      Chef::Log.info("The public_key is: #{node[:rundeck][:public_key]}")
+      content node[:rundeck][:public_key]
+      owner node[:rundeck][:username]
+      group node[:rundeck][:group]
+      mode 0644
+   end
+
+   ruby_block "store rundeck ssh pubkey" do
+     block do
+       node.set[:rundeck][:pubkey] = File.open("#{pkey}.pub") { |f| f.gets }
+     end
+   end
+
+   file "#{node[:rundeck][:home]}/.ssh/authorized_keys" do
+     action :create
+     mode 0600
+     owner node[:rundeck][:username]
+     group node[:rundeck][:group]
+     content node[:rundeck][:pubkey]
+   end
+
 
 	service 'rundeckd' do
 		provider Chef::Provider::Service::Upstart if platform?('ubuntu') && node['platform_version'].to_f >= 12.04
