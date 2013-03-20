@@ -16,7 +16,7 @@
 
 	dpkg_package "#{Chef::Config['file_cache_path']}/rundeck-#{node['rundeck']['version']}.deb" do
 		action :install
-		notifies :delete, 'file[/etc/rundeck/realm.properties]'
+		#notifies :delete, 'file[/etc/rundeck/realm.properties]'
 	end
 
 	# Erase the default realm.properties after package install, we manage that
@@ -69,6 +69,14 @@
 
 	cookbook_file "/etc/rundeck/realm.properties" do
 		source 'realm.properties'
+		owner 'rundeck'
+		group 'rundeck'
+		mode 00644
+		action :create
+	end
+
+		cookbook_file "/etc/rundeck/admin.aclpolicy" do
+		source 'admin.aclpolicy'
 		owner 'rundeck'
 		group 'rundeck'
 		mode 00644

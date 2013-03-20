@@ -19,7 +19,7 @@ bash "installing ec2-api-tools" do
   user "root"
   cwd "/tmp"
   code <<-BASH_SCRIPT
-  tar cvzf ec2-api-tools.tgz
+  tar xvzf ec2-api-tools.tgz
   mv ec2-api-tools #{node[:rundeck][:home]}/var/
   BASH_SCRIPT
   not_if do

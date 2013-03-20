@@ -1,4 +1,4 @@
-escription: Admin, all access.
+description: Admin, all access.
 context:
   project: '.*' # all projects
 for:
@@ -69,7 +69,7 @@ context:
 for:
   project:
     - match:
-        name: 'QA2_Serers'
+        name: 'QA2_Severs'
       allow: [read]
 by:
   group: qa2
@@ -78,7 +78,7 @@ by:
 
 description: QA2
 context:
-  project: 'QA2_Serers'
+  project: 'QA2_Severs'
 for:
   resource:
     - equals:
