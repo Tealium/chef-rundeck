@@ -106,8 +106,8 @@
    rundeck_keys = search(:rundeck_keys, "id:production").first
 
    
-   node[:rundeck][:public_key] = rundeck_keys["public_key"] 
-   node[:rundeck][:private_key] = rundeck_keys["private_key"]
+   node.default[:rundeck][:public_key] = rundeck_keys["public_key"] 
+   node.default[:rundeck][:private_key] = rundeck_keys["private_key"]
 
   directory "#{node[:rundeck][:home]}/.ssh" do
     mode 0700
@@ -133,7 +133,7 @@
 
    ruby_block "store rundeck ssh pubkey" do
      block do
-       node.set[:rundeck][:pubkey] = File.open("#{pkey}.pub") { |f| f.gets }
+       node.default[:rundeck][:pubkey] = File.open("#{pkey}.pub") { |f| f.gets }
      end
    end
 

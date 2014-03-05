@@ -1,7 +1,7 @@
 # Package
-default['rundeck']['version'] = '1.5-1-GA'
+default['rundeck']['version'] = '2.0.1-1-GA'
 default['rundeck']['deb_url'] = "http://download.rundeck.org/deb/rundeck-#{node['rundeck']['version']}.deb"
-default['rundeck']['deb_checksum'] = '658f0cf61f23e02cb9a6506ba6b637cc2d557bc40b4a3fc8b19bb143f5e0bea2'
+default['rundeck']['deb_checksum'] = 'f488a0c2a878b218ebba04879f601023'
 default['rundeck']['rpm_url'] = 'http://repo.rundeck.org/latest.rpm'
 
 # Framework configuration
