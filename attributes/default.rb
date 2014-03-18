@@ -26,6 +26,9 @@ default['rundeck']['mail']['recipients_field'] = 'email'
 default['rundeck']['admin']['data_bag'] = 'cookies'
 default['rundeck']['admin']['data_bag_id'] = 'rundeck'
 
+default['rundeck']['admin']['username'] = 'admin'
+default['rundeck']['admin']['password'] = 'AdminPass'
+
 default['rundeck']['proxy']['hostname'] = 'servers.ops.tlium.com'
 default['rundeck']['proxy']['default'] = false
 
