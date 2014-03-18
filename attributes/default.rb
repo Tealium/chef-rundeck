@@ -38,3 +38,6 @@ default['rundeck']['chef']['port'] = 9998
 default['rundeck']['username'] = 'rundeck'
 default['rundeck']['group'] = 'rundeck'
 default['rundeck']['password'] = 'rundeck'
+
+default['rundeck']['admin_user'] = 'admin'
+default['rundeck']['admin_pass'] = 'AdminPass'
