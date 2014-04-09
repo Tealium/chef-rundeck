@@ -104,7 +104,7 @@ context:
 for:
   project:
     - match:
-        name: 'TMU_Servers'
+        name: 'TMU'
       allow: [read]
 by:
   group: tmu
@@ -113,7 +113,7 @@ by:
 
 description: TMU
 context:
-  project: 'TMU_Servers'
+  project: 'TMU'
 for:
   resource:
     - equals:

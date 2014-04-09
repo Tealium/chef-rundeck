@@ -158,8 +158,8 @@ framework.centraldispatcher.classname = com.dtolabs.client.services.RundeckAPICe
 #
 # rdeck server connection.
 #
-framework.server.username = <%= @admin_user %>
-framework.server.password = <%= @admin_pass %>
+framework.server.username = <%= node['rundeck']['admin']['username'] %>
+framework.server.password = <%= node['rundeck']['admin']['password'] %>
 framework.server.hostname = localhost
 framework.server.name = localhost
 framework.server.port = 4440
