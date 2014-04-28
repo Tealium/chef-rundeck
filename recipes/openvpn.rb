@@ -16,24 +16,27 @@ directory "#{node[:rundeck][:home]}/.openvpn" do
     group node[:rundeck][:group]
   end
 
-file "/etc/rundeck/ca.crt" do
+cookbook_file "/etc/rundeck/ca.crt" do
    Chef::Log.info("The ca cert to use to connect to the access servers in qa")
    source 'ca.crt'
    mode 0600
-   action :create
+   owner "rundeck"
+   group "rundeck"
 end
 
-file "/etc/rundeck/rundeck.crt" do
+cookbook_file "/etc/rundeck/rundeck.crt" do
    Chef::Log.info("The private cert for the rundeck user to use to connect to the access servers in qa")
    source 'rundeck.crt'
    mode 0600
-   action :create
+   owner "rundeck"
+   group "rundeck"
 end
 
-file "/etc/rundeck/rundeck.key" do
+cookbook_file "/etc/rundeck/rundeck.key" do
    Chef::Log.info("The private key to use to connect to the access servers in qa")
    source 'rundeck.key'
    mode 0600
+   action :create
    action :create
 end
 
