@@ -10,6 +10,7 @@
 #end
 
 
+include_recipe "rvm::default"
 #need to install the latest gems globally andcally.
 
 %w(
