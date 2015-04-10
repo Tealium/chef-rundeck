@@ -1,3 +1,4 @@
+name        "chef-rundeck"
 maintainer       "Metaworx Inc."
 maintainer_email "pj@ezgr.net"
 license          ""
